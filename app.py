@@ -12,6 +12,7 @@ import os
 # Load environment variables
 load_dotenv(".env")
 
+
 # Display logo and header
 logo_path = "data/bps.png"
 

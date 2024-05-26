@@ -9,6 +9,7 @@ from langchain.callbacks import get_openai_callback
 from dotenv import load_dotenv
 import os
 
+# Load environment variables
 load_dotenv(".env")
 
 # Display logo and header
@@ -16,14 +17,14 @@ logo_path = "data/bps.png"
 
 # Check if the logo file exists
 if os.path.exists(logo_path):
-    st.image(logo_path, width=100)  # Adjust width as needed
+    st.image(logo_path, width=150)  # Adjust width as needed
 else:
     st.warning("Logo file not found. Make sure 'bps_logo.png' is in the same directory as your script.")
 
-st.header("BADAN PUSAT STATISTIK PROVINSI ACEH")
+st.title("BADAN PUSAT STATISTIK PROVINSI ACEH")
 
 # Replace file uploader with direct file path
-pdf_path = "data/MV wahyu.pdf"  # Ganti dengan path ke file PDF Anda
+pdf_path = "data/ProfilBPS.pdf"  # Ganti dengan path ke file PDF Anda
 
 if os.path.exists(pdf_path):
     pdf_reader = PdfReader(pdf_path)
@@ -44,9 +45,9 @@ if os.path.exists(pdf_path):
     embeddings = OpenAIEmbeddings()
     knowledge_base = FAISS.from_texts(chunks, embeddings)
 else:
-    st.error("File PDF tidak ditemukan. Pastikan path file sudah benar.")
+    st.error("File PDF tidak ditemukan. Pastikan path file sudah benar 😺.")
 
-pertanyaan = st.text_input("Tanya Tentang BPS yang sudah diupload")
+pertanyaan = st.text_input("Perlu info BPS Provinsi Aceh tanyak ajaa!!👋")
 if pertanyaan:
     # Ensure that knowledge_base is initialized
     if 'knowledge_base' in locals():
@@ -56,6 +57,8 @@ if pertanyaan:
         chain = load_qa_chain(llm, chain_type='stuff')
         with get_openai_callback() as cb:
             response = chain.run(input_documents=docs, question=pertanyaan)
+        st.subheader("Jawaban:")
         st.write(response)
     else:
-        st.error("Knowledge base belum terinisialisasi. Pastikan file PDF sudah benar dan di proses.")
+        st.error("Knowledge base belum terinisialisasi. Pastikan file PDF sudah benar dan diproses.")
+

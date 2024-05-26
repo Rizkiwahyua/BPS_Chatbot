@@ -45,3 +45,5 @@ while True:
    with get_openai_callback() as cb:
      response = chain.run(input_docments=docs, question=pertanyaan)
    print(response)
+
+   

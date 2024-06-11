@@ -6,7 +6,6 @@ from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
-from langchain_community.vectorstores import FAISS
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -37,13 +36,11 @@ knowledge_base = FAISS.from_texts(chunks, embeddings)
 # chat logic
 print("[INFO] Starting Bot..")
 while True:
-   pertanyaan = input("Anda > ")
-   docs = knowledge_base.similarity_search(pertanyaan)
+    pertanyaan = input("Anda > ")
+    docs = knowledge_base.similarity_search(pertanyaan)
 
-   llm = OpenAI()
-   chain = load_qa_chain(llm, chain_type= 'stuff')
-   with get_openai_callback() as cb:
-     response = chain.run(input_docments=docs, question=pertanyaan)
-   print(response)
-
-   
+    llm = OpenAI()
+    chain = load_qa_chain(llm, chain_type='stuff')
+    with get_openai_callback() as cb:
+        response = chain.run(input_documents=docs, question=pertanyaan)
+    print(response)

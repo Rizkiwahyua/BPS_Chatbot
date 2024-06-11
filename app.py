@@ -12,7 +12,6 @@ import os
 # Load environment variables
 load_dotenv(".env")
 
-
 # Display logo and header
 logo_path = "data/bps.png"
 
@@ -62,4 +61,3 @@ if pertanyaan:
         st.write(response)
     else:
         st.error("Knowledge base belum terinisialisasi. Pastikan file PDF sudah benar dan diproses.")
-
